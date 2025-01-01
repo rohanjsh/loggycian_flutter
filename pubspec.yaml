@@ -1,0 +1,31 @@
+name: loggycian_flutter
+description: Loggycian view for flutter apps
+version: 0.1.0+2
+
+environment:
+  sdk: ^3.5.0
+  flutter: ^3.24.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  loggycian_networking: ^0.1.0+2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^6.0.0
+
+flutter:
+  fonts:
+    - family: EuclidCircularB
+      fonts:
+        - asset: assets/fonts/euclid_circularB_bold.ttf
+          weight: 700
+        - asset: assets/fonts/euclid_circularB_regular.ttf
+          weight: 400
+        - asset: assets/fonts/euclid_circularB_semi_bold.ttf
+          weight: 600
+        - asset: assets/fonts/euclid_circularB_medium.ttf
+          weight: 500
