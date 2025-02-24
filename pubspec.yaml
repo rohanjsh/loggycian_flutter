@@ -1,6 +1,6 @@
 name: loggycian_flutter
 description: Loggycian view for flutter apps
-version: 0.1.0+1
+version: 0.1.0+2
 repository: https://github.com/rohanjsh/loggycian_flutter.git
 
 environment:
