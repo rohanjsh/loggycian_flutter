@@ -19,7 +19,6 @@ class NetworkLoggerHomePage extends StatefulWidget {
 }
 
 class _NetworkLoggerHomePageState extends State<NetworkLoggerHomePage> {
-  static const _toolbarHeight = 48.0;
   late final NetworkLoggerHomeController _controller;
 
   @override
@@ -34,28 +33,26 @@ class _NetworkLoggerHomePageState extends State<NetworkLoggerHomePage> {
     return ListenableBuilder(
       listenable: _controller,
       builder: (context, _) {
-        final bottomSafeArea = MediaQuery.paddingOf(context).bottom;
-        final bottomBarHeight = _controller.state.isSelectableMode
-            ? _toolbarHeight + bottomSafeArea
-            : 0.0;
-
         return Scaffold(
           backgroundColor: AppColors.black,
-          bottomNavigationBar: AnimatedContainer(
-            curve: Curves.easeOut,
-            duration: kAnimationDefaultDuration,
-            color: AppColors.overlayDark,
-            height: bottomBarHeight,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ActionButton.text(
-                label: AppStrings.remove,
-                onPressed: _controller.hasSelectedLogs
-                    ? _controller.onRemoveLogs
-                    : null,
-              ),
-            ),
-          ),
+          bottomNavigationBar: _controller.state.isSelectableMode
+              ? SafeArea(
+                  child: ColoredBox(
+                    color: AppColors.overlayDark,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                      ),
+                      child: ActionButton.text(
+                        label: AppStrings.remove,
+                        onPressed: _controller.hasSelectedLogs
+                            ? _controller.onRemoveLogs
+                            : null,
+                      ),
+                    ),
+                  ),
+                )
+              : null,
           appBar: AppBar(
             foregroundColor: AppColors.white,
             backgroundColor: AppColors.black,
@@ -99,8 +96,8 @@ class _NetworkLoggerHomePageState extends State<NetworkLoggerHomePage> {
                 onChanged: _controller.onSearchChanged,
               ),
               const SizedBox(height: 8),
-              AnimatedCrossFade(
-                firstChild: Padding(
+              if (_controller.state.isSelectableMode)
+                Padding(
                   padding: const EdgeInsets.only(left: 32, top: 6),
                   child: Row(
                     children: [
@@ -130,13 +127,9 @@ class _NetworkLoggerHomePageState extends State<NetworkLoggerHomePage> {
                       ),
                     ],
                   ),
-                ),
-                secondChild: const SizedBox.shrink(),
-                duration: kAnimationDefaultDuration,
-                crossFadeState: _controller.state.isSelectableMode
-                    ? CrossFadeState.showFirst
-                    : CrossFadeState.showSecond,
-              ),
+                )
+              else
+                const SizedBox.shrink(),
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (_, __) => const SizedBox(

@@ -132,8 +132,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Loggycian(app: Scaffold(body: Center(child: ApiCaller()))),
+    return Loggycian(
+      navigatorKey: navigatorKey,
+      app: MaterialApp(
+        navigatorKey: navigatorKey,
+        home: Scaffold(body: Center(child: ApiCaller())),
+      ),
     );
   }
 }

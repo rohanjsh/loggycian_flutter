@@ -43,27 +43,25 @@ class NetworkLogItem extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 5),
-                child: AnimatedCrossFade(
-                  duration: kAnimationDefaultDuration,
-                  crossFadeState: isSelectableMode
-                      ? CrossFadeState.showFirst
-                      : CrossFadeState.showSecond,
-                  secondChild: const SizedBox.shrink(),
-                  firstChild: IconButton(
-                    onPressed: onTap,
-                    constraints: const BoxConstraints(),
-                    padding: EdgeInsets.zero,
-                    style: const ButtonStyle(
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    icon: Icon(
-                      isSelected ? Icons.check_circle : Icons.circle_outlined,
-                      color:
-                          isSelected ? const Color(0xff0FA457) : Colors.white,
-                      size: 16,
-                    ),
-                  ),
-                ),
+                child: isSelectableMode
+                    ? IconButton(
+                        onPressed: onTap,
+                        constraints: const BoxConstraints(),
+                        padding: EdgeInsets.zero,
+                        style: const ButtonStyle(
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        icon: Icon(
+                          isSelected
+                              ? Icons.check_circle
+                              : Icons.circle_outlined,
+                          color: isSelected
+                              ? const Color(0xff0FA457)
+                              : Colors.white,
+                          size: 16,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
               ),
               if (isSelectableMode) const SizedBox(width: 8),
               Expanded(
